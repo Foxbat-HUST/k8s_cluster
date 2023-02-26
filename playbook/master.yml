@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  roles:
+  - geerlingguy.containerd
+  tasks:
+    - import_tasks: tasks/config_containerd.yml
+    - import_tasks: tasks/setup_kube.yml
+        
+      
+
