@@ -3,3 +3,13 @@
   become: yes
   roles:
   - geerlingguy.containerd
+  tasks:
+    - import_tasks: tasks/config_containerd.yml
+    - import_tasks: tasks/setup_kube.yml
+
+    - name: Copy the join command to server location
+      copy: src=join-command dest=/tmp/join-command.sh mode=0777
+
+    - name: Join the node to cluster
+      command: sh /tmp/join-command.sh
+
